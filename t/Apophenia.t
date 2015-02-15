@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 6;
 BEGIN { use_ok('Apophenia') };
 
 #########################
@@ -19,7 +19,6 @@ BEGIN { use_ok('Apophenia') };
 is(treble(1), 3);
 is(treble(2), 6);
 is(echo_str("abc"), "abc");
-apop_db_open("./sample.db");
-
+is(apop_db_open("./sample.db"), 1, "db opened");
 is(apop_table_exists("sample", 'n'),1);
 
