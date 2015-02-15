@@ -21,4 +21,5 @@ is(treble(2), 6);
 is(echo_str("abc"), "abc");
 is(apop_db_open("./sample.db"), 1, "db opened");
 is(apop_table_exists("sample", 'n'),1);
+is(ftest(8,23,10,121),0.08203);
 

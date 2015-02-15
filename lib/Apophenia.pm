@@ -21,6 +21,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
         echo_str
         apop_db_open
         apop_table_exists
+        ftest
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
