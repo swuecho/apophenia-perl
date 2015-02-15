@@ -1,0 +1,8 @@
+Apophenia.xs
+Changes
+Makefile.PL
+MANIFEST
+ppport.h
+README
+t/Apophenia.t
+lib/Apophenia.pm
