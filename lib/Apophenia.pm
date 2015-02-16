@@ -16,12 +16,7 @@ our @ISA = qw(Exporter);
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw(
-        print_hello
-        treble
-        echo_str
-        apop_db_open
-        apop_table_exists
-        ftest
+        rake
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
@@ -41,7 +36,7 @@ __END__
 
 =head1 NAME
 
-Apophenia - Perl extension for blah blah blah
+Apophenia - Perl extension for Apopnenia C lib
 
 =head1 SYNOPSIS
 
