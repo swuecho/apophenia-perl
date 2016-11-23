@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;;
+use Test::More tests => 3;
 BEGIN { use_ok('Apophenia') };
 
 #########################
@@ -18,8 +18,9 @@ BEGIN { use_ok('Apophenia') };
 
 #is(apop_db_open("./sample.db"), 1, "db opened");
 #is(apop_table_exists("sample", 'n'),1);
-is(ftest(8,23,10,121),0.08203);
+my @arr = (1,2,3);
+is(sum(\@arr), 6);
+is(mean(\@arr), 2);
 
-rake("/home/hwu/dev/apop/Apophenia/t/sample.db");
 
 
