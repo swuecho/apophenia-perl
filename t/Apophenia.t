@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 BEGIN { use_ok('Apophenia') };
 
 #########################
@@ -21,6 +21,7 @@ BEGIN { use_ok('Apophenia') };
 my @arr = (1,2,3);
 is(sum(\@arr), 6);
 is(mean(\@arr), 2);
+is(kurtosis(\@arr), 0.75);
 
 
 

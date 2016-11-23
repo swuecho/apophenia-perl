@@ -8,6 +8,7 @@
 #include "apop.h"
 #include "stdio.h"
 
+
 double sum(AV* array)
 {
   int i;
@@ -38,6 +39,20 @@ double mean(AV* array)
   return mean;
 }
 
+double kurtosis(AV* array)
+{
+  int i;
+  double kurtosis= 0.0;
+  int av_length = av_len(array) +1;
+  gsl_vector* v = gsl_vector_alloc(av_length);
+  for (i = 0; i < av_length; i++) {
+      SV** elem = av_fetch(array, i, 0);
+      gsl_vector_set(v, i, SvNV(*elem));
+    }
+  kurtosis = apop_vector_kurtosis(v);
+  gsl_vector_free (v);
+  return kurtosis;
+}
 
 MODULE = Apophenia		PACKAGE = Apophenia		
 
@@ -48,5 +63,10 @@ sum(array)
 double
 mean(array)
         AV * array
+
+double
+kurtosis(array)
+        AV * array
+
 
 
