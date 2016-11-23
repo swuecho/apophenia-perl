@@ -91,7 +91,67 @@ double kurtosis(AV* array)
   return kurtosis;
 }
 
-#line 95 "Apophenia.c"
+
+AV* t_test_arr(AV* l, AV* r) {
+  int i;
+  // init gsl_vector l
+  int av_l_length = av_len(l) +1;
+  gsl_vector* v_l = gsl_vector_alloc(av_l_length);
+  for (i = 0; i < av_l_length; i++) {
+      SV** elem = av_fetch(l, i, 0);
+      gsl_vector_set(v_l, i, SvNV(*elem));
+  }
+
+  // init gsl_vector r
+  int av_r_length = av_len(r) +1;
+  gsl_vector* v_r = gsl_vector_alloc(av_r_length);
+  for (i = 0; i < av_r_length; i++) {
+      SV** elem = av_fetch(r, i, 0);
+      gsl_vector_set(v_r, i, SvNV(*elem));
+  }
+  apop_data *test_out = apop_t_test(v_l, v_r);
+/*
+   apop_data_add_named_elmt(out, "mean left - right", diff);
+   apop_data_add_named_elmt(out, "t statistic", stat);
+   apop_data_add_named_elmt(out, "df", df);
+   apop_data_add_named_elmt(out, "p value, 1 tail", GSL_MIN(pval,qval));
+   apop_data_add_named_elmt(out, "confidence, 1 tail", 1 - GSL_MIN(pval,qval));
+   apop_data_add_named_elmt(out, "p value, 2 tail", 1- two_tail);
+   apop_data_add_named_elmt(out, "confidence, 2 tail", two_tail);
+*/
+   double diff = apop_data_get(test_out, .rowname="mean left - right");
+   double t_stat = apop_data_get(test_out, .rowname="t statistic");
+   double df  = apop_data_get(test_out, .rowname="df");
+   double p_value_1_tail  = apop_data_get(test_out, .rowname="p value, 1 tail");
+   double one_tail = apop_data_get(test_out, .rowname="confidence, 1 tail");
+   double p_value_2_tail  = apop_data_get(test_out, .rowname="p value, 2 tail");
+   double two_tail = apop_data_get(test_out, .rowname="confidence, 1 tail");
+   AV* av= newAV();
+   sv_2mortal((SV*)av);
+   av_store(av,0, newSVnv(diff));
+   av_store(av,1, newSVnv(t_stat));
+   av_store(av,2, newSVnv(df));
+   av_store(av,3, newSVnv(p_value_1_tail));
+   av_store(av,4, newSVnv(one_tail));
+   av_store(av,5, newSVnv(p_value_2_tail));
+   av_store(av,6, newSVnv(two_tail));
+   return av;
+
+  /*int rv_size = test_out_vector->size;
+  AV* av= newAV();
+  sv_2mortal((SV*)av);
+  for (i = 0; i < rv_size; i++)
+    {
+      av_store(av,i, newSVnv(gsl_vector_get(test_out_vector, i)));
+    }
+*/
+    
+  //TODO: return app_data outcome vector and then write perl wrapper
+}
+
+
+
+#line 155 "Apophenia.c"
 #ifndef PERL_UNUSED_VAR
 #  define PERL_UNUSED_VAR(var) if (0) var = var
 #endif
@@ -235,7 +295,7 @@ S_croak_xs_usage(const CV *const cv, const char *const params)
 #  define newXS_deffile(a,b) Perl_newXS_deffile(aTHX_ a,b)
 #endif
 
-#line 239 "Apophenia.c"
+#line 299 "Apophenia.c"
 
 XS_EUPXS(XS_Apophenia_sum); /* prototype to pass -Wmissing-prototypes */
 XS_EUPXS(XS_Apophenia_sum)
@@ -396,6 +456,57 @@ XS_EUPXS(XS_Apophenia_kurtosis)
     XSRETURN(1);
 }
 
+
+XS_EUPXS(XS_Apophenia_t_test_arr); /* prototype to pass -Wmissing-prototypes */
+XS_EUPXS(XS_Apophenia_t_test_arr)
+{
+    dVAR; dXSARGS;
+    if (items != 2)
+       croak_xs_usage(cv,  "l, r");
+    {
+	AV*	l;
+	AV*	r;
+	AV *	RETVAL;
+
+	STMT_START {
+		SV* const xsub_tmp_sv = ST(0);
+		SvGETMAGIC(xsub_tmp_sv);
+		if (SvROK(xsub_tmp_sv) && SvTYPE(SvRV(xsub_tmp_sv)) == SVt_PVAV){
+		    l = (AV*)SvRV(xsub_tmp_sv);
+		}
+		else{
+		    Perl_croak_nocontext("%s: %s is not an ARRAY reference",
+				"Apophenia::t_test_arr",
+				"l");
+		}
+	} STMT_END
+;
+
+	STMT_START {
+		SV* const xsub_tmp_sv = ST(1);
+		SvGETMAGIC(xsub_tmp_sv);
+		if (SvROK(xsub_tmp_sv) && SvTYPE(SvRV(xsub_tmp_sv)) == SVt_PVAV){
+		    r = (AV*)SvRV(xsub_tmp_sv);
+		}
+		else{
+		    Perl_croak_nocontext("%s: %s is not an ARRAY reference",
+				"Apophenia::t_test_arr",
+				"r");
+		}
+	} STMT_END
+;
+
+	RETVAL = t_test_arr(l, r);
+	{
+	    SV * RETVALSV;
+	    RETVALSV = newRV((SV*)RETVAL);
+	    RETVALSV = sv_2mortal(RETVALSV);
+	    ST(0) = RETVALSV;
+	}
+    }
+    XSRETURN(1);
+}
+
 #ifdef __cplusplus
 extern "C"
 #endif
@@ -429,6 +540,7 @@ XS_EXTERNAL(boot_Apophenia)
         newXS_deffile("Apophenia::var", XS_Apophenia_var);
         newXS_deffile("Apophenia::skew", XS_Apophenia_skew);
         newXS_deffile("Apophenia::kurtosis", XS_Apophenia_kurtosis);
+        newXS_deffile("Apophenia::t_test_arr", XS_Apophenia_t_test_arr);
 #if PERL_VERSION_LE(5, 21, 5)
 #  if PERL_VERSION_GE(5, 9, 0)
     if (PL_unitcheckav)

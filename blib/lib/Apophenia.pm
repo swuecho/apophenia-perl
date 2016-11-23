@@ -3,6 +3,7 @@ package Apophenia;
 use 5.020000;
 use strict;
 use warnings;
+use List::Util;
 
 require Exporter;
 
@@ -21,6 +22,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
         var
         skew
         kurtosis
+        t_test
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
@@ -33,6 +35,14 @@ require XSLoader;
 XSLoader::load('Apophenia', $VERSION);
 
 # Preloaded methods go here.
+sub t_test {
+    my($t1, $t2) = @_;
+    my $t_test_arr_return = t_test_arr($t1, $t2);
+    my @names = ("mean left - right","t statistic","df", "p value, 1 tail","confidence, 1 tail","p value, 2 tail","confidence, 1 tail");
+    my %result;
+    $result{$names[$_]} = $t_test_arr_return->[$_] for 0..6;
+    return \%result;
+}
 
 1;
 __END__
