@@ -47,7 +47,35 @@ double mean(AV* array)
   gsl_vector_free (v);
   return mean;
 }
+double var(AV* array)
+{
+  int i;
+  double var= 0.0;
+  int av_length = av_len(array) +1;
+  gsl_vector* v = gsl_vector_alloc(av_length);
+  for (i = 0; i < av_length; i++) {
+      SV** elem = av_fetch(array, i, 0);
+      gsl_vector_set(v, i, SvNV(*elem));
+    }
+  var = apop_vector_var(v);
+  gsl_vector_free (v);
+  return var;
+}
 
+double skew(AV* array)
+{
+  int i;
+  double skew= 0.0;
+  int av_length = av_len(array) +1;
+  gsl_vector* v = gsl_vector_alloc(av_length);
+  for (i = 0; i < av_length; i++) {
+      SV** elem = av_fetch(array, i, 0);
+      gsl_vector_set(v, i, SvNV(*elem));
+    }
+  skew = apop_vector_skew(v);
+  gsl_vector_free (v);
+  return skew;
+}
 double kurtosis(AV* array)
 {
   int i;
@@ -63,7 +91,7 @@ double kurtosis(AV* array)
   return kurtosis;
 }
 
-#line 67 "Apophenia.c"
+#line 95 "Apophenia.c"
 #ifndef PERL_UNUSED_VAR
 #  define PERL_UNUSED_VAR(var) if (0) var = var
 #endif
@@ -207,7 +235,7 @@ S_croak_xs_usage(const CV *const cv, const char *const params)
 #  define newXS_deffile(a,b) Perl_newXS_deffile(aTHX_ a,b)
 #endif
 
-#line 211 "Apophenia.c"
+#line 239 "Apophenia.c"
 
 XS_EUPXS(XS_Apophenia_sum); /* prototype to pass -Wmissing-prototypes */
 XS_EUPXS(XS_Apophenia_sum)
@@ -267,6 +295,70 @@ XS_EUPXS(XS_Apophenia_mean)
 ;
 
 	RETVAL = mean(array);
+	XSprePUSH; PUSHn((double)RETVAL);
+    }
+    XSRETURN(1);
+}
+
+
+XS_EUPXS(XS_Apophenia_var); /* prototype to pass -Wmissing-prototypes */
+XS_EUPXS(XS_Apophenia_var)
+{
+    dVAR; dXSARGS;
+    if (items != 1)
+       croak_xs_usage(cv,  "array");
+    {
+	AV *	array;
+	double	RETVAL;
+	dXSTARG;
+
+	STMT_START {
+		SV* const xsub_tmp_sv = ST(0);
+		SvGETMAGIC(xsub_tmp_sv);
+		if (SvROK(xsub_tmp_sv) && SvTYPE(SvRV(xsub_tmp_sv)) == SVt_PVAV){
+		    array = (AV*)SvRV(xsub_tmp_sv);
+		}
+		else{
+		    Perl_croak_nocontext("%s: %s is not an ARRAY reference",
+				"Apophenia::var",
+				"array");
+		}
+	} STMT_END
+;
+
+	RETVAL = var(array);
+	XSprePUSH; PUSHn((double)RETVAL);
+    }
+    XSRETURN(1);
+}
+
+
+XS_EUPXS(XS_Apophenia_skew); /* prototype to pass -Wmissing-prototypes */
+XS_EUPXS(XS_Apophenia_skew)
+{
+    dVAR; dXSARGS;
+    if (items != 1)
+       croak_xs_usage(cv,  "array");
+    {
+	AV *	array;
+	double	RETVAL;
+	dXSTARG;
+
+	STMT_START {
+		SV* const xsub_tmp_sv = ST(0);
+		SvGETMAGIC(xsub_tmp_sv);
+		if (SvROK(xsub_tmp_sv) && SvTYPE(SvRV(xsub_tmp_sv)) == SVt_PVAV){
+		    array = (AV*)SvRV(xsub_tmp_sv);
+		}
+		else{
+		    Perl_croak_nocontext("%s: %s is not an ARRAY reference",
+				"Apophenia::skew",
+				"array");
+		}
+	} STMT_END
+;
+
+	RETVAL = skew(array);
 	XSprePUSH; PUSHn((double)RETVAL);
     }
     XSRETURN(1);
@@ -334,6 +426,8 @@ XS_EXTERNAL(boot_Apophenia)
 
         newXS_deffile("Apophenia::sum", XS_Apophenia_sum);
         newXS_deffile("Apophenia::mean", XS_Apophenia_mean);
+        newXS_deffile("Apophenia::var", XS_Apophenia_var);
+        newXS_deffile("Apophenia::skew", XS_Apophenia_skew);
         newXS_deffile("Apophenia::kurtosis", XS_Apophenia_kurtosis);
 #if PERL_VERSION_LE(5, 21, 5)
 #  if PERL_VERSION_GE(5, 9, 0)

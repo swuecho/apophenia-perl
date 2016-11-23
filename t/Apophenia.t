@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 6;
 BEGIN { use_ok('Apophenia') };
 
 #########################
@@ -18,9 +18,11 @@ BEGIN { use_ok('Apophenia') };
 
 #is(apop_db_open("./sample.db"), 1, "db opened");
 #is(apop_table_exists("sample", 'n'),1);
-my @arr = (1,2,3);
+my @arr = (1..3);
 is(sum(\@arr), 6);
 is(mean(\@arr), 2);
+is(var(\@arr), 1);
+is(skew(\@arr), 0);
 is(kurtosis(\@arr), 0.75);
 
 

@@ -38,7 +38,35 @@ double mean(AV* array)
   gsl_vector_free (v);
   return mean;
 }
+double var(AV* array)
+{
+  int i;
+  double var= 0.0;
+  int av_length = av_len(array) +1;
+  gsl_vector* v = gsl_vector_alloc(av_length);
+  for (i = 0; i < av_length; i++) {
+      SV** elem = av_fetch(array, i, 0);
+      gsl_vector_set(v, i, SvNV(*elem));
+    }
+  var = apop_vector_var(v);
+  gsl_vector_free (v);
+  return var;
+}
 
+double skew(AV* array)
+{
+  int i;
+  double skew= 0.0;
+  int av_length = av_len(array) +1;
+  gsl_vector* v = gsl_vector_alloc(av_length);
+  for (i = 0; i < av_length; i++) {
+      SV** elem = av_fetch(array, i, 0);
+      gsl_vector_set(v, i, SvNV(*elem));
+    }
+  skew = apop_vector_skew(v);
+  gsl_vector_free (v);
+  return skew;
+}
 double kurtosis(AV* array)
 {
   int i;
@@ -63,6 +91,15 @@ sum(array)
 double
 mean(array)
         AV * array
+
+double
+var(array)
+        AV * array
+
+double
+skew(array)
+        AV * array
+
 
 double
 kurtosis(array)
