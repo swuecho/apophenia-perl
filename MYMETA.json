@@ -29,12 +29,9 @@
          "requires" : {
             "ExtUtils::MakeMaker" : "0"
          }
-      },
-      "runtime" : {
-         "requires" : {}
       }
    },
    "release_status" : "stable",
-   "version" : "0",
+   "version" : "",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }

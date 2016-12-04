@@ -1516,10 +1516,10 @@ static swig_module_info swig_module = {swig_types, 3, 0, 0, 0, 0};
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    boot_Apophenia
+#define SWIG_init    boot_Apophenia__Stat
 
-#define SWIG_name   "Apopheniac::boot_Apophenia"
-#define SWIG_prefix "Apopheniac::"
+#define SWIG_name   "Apophenia::Statc::boot_Apophenia__Stat"
+#define SWIG_prefix "Apophenia::Statc::"
 
 #define SWIGVERSION 0x030010 
 #define SWIG_VERSION SWIGVERSION
@@ -1550,8 +1550,8 @@ extern "C" {
 #endif
 
 #ifdef PERL_OBJECT
-#define MAGIC_CLASS _wrap_Apophenia_var::
-class _wrap_Apophenia_var : public CPerlObj {
+#define MAGIC_CLASS _wrap_Apophenia__Stat_var::
+class _wrap_Apophenia__Stat_var : public CPerlObj {
 public:
 #else
 #define MAGIC_CLASS
@@ -1665,8 +1665,8 @@ static swig_variable_info swig_variables[] = {
 {0,0,0,0}
 };
 static swig_command_info swig_commands[] = {
-{"Apopheniac::apop_vector_log", _wrap_apop_vector_log},
-{"Apopheniac::apop_vector_sum", _wrap_apop_vector_sum},
+{"Apophenia::Statc::apop_vector_log", _wrap_apop_vector_log},
+{"Apophenia::Statc::apop_vector_sum", _wrap_apop_vector_sum},
 {0,0}
 };
 /* -----------------------------------------------------------------------------

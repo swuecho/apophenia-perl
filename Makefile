@@ -11,11 +11,9 @@
 
 #   MakeMaker Parameters:
 
-#     ABSTRACT_FROM => q[Apophenia.pm]
 #     AUTHOR => [q[Hao Wu <echowuhao@gmail.com>]]
 #     BUILD_REQUIRES => {  }
 #     CONFIGURE_REQUIRES => {  }
-#     DEFINE => q[]
 #     INC => q[-I. -I/usr/include/lib]
 #     LIBS => [q[-lapophenia -lgsl -lgslcblas -lsqlite3]]
 #     LICENSE => q[perl]
@@ -23,7 +21,6 @@
 #     OBJECT => q[Apophenia.o Apophenia_wrap.o]
 #     PREREQ_PM => {  }
 #     TEST_REQUIRES => {  }
-#     VERSION_FROM => q[Apophenia.pm]
 
 # --- MakeMaker post_initialize section:
 
@@ -62,11 +59,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Apophenia
 NAME_SYM = Apophenia
-VERSION = 0
+VERSION = 
 VERSION_MACRO = VERSION
-VERSION_SYM = 0
+VERSION_SYM = 
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0
+XS_VERSION = 
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -156,9 +153,8 @@ FULLEXT = Apophenia
 BASEEXT = Apophenia
 PARENT_NAME = 
 DLBASE = $(BASEEXT)
-VERSION_FROM = Apophenia.pm
+VERSION_FROM = 
 INC = -I. -I/usr/include/lib
-DEFINE = 
 OBJECT = Apophenia$(OBJ_EXT) Apophenia_wrap$(OBJ_EXT)
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -272,7 +268,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Apophenia
-DISTVNAME = Apophenia-0
+DISTVNAME = Apophenia-
 
 
 # --- MakeMaker macro section:
@@ -315,7 +311,7 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 	LINKTYPE="$(LINKTYPE)"\
 	OPTIMIZE="$(OPTIMIZE)"\
 	PREFIX="$(PREFIX)"\
-	PASTHRU_DEFINE=' $(PASTHRU_DEFINE)'\
+	PASTHRU_DEFINE='$(DEFINE) $(PASTHRU_DEFINE)'\
 	PASTHRU_INC='-I. -I/usr/include/lib $(PASTHRU_INC)'
 
 
@@ -599,8 +595,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '  directory:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
-	$(NOECHO) $(ECHO) 'requires: {}' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: '\'''\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'x_serialization_backend: '\''CPAN::Meta::YAML version 0.018'\''' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
@@ -635,13 +630,10 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '            "ExtUtils::MakeMaker" : "0"' >> META_new.json
 	$(NOECHO) $(ECHO) '         }' >> META_new.json
-	$(NOECHO) $(ECHO) '      },' >> META_new.json
-	$(NOECHO) $(ECHO) '      "runtime" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '         "requires" : {}' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27300"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
@@ -1030,7 +1022,7 @@ testdb_static :: static pure_all $(MAP_TARGET)
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="Apophenia" VERSION="0">' > Apophenia.ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="Apophenia" VERSION="">' > Apophenia.ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> Apophenia.ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Hao Wu &lt;echowuhao@gmail.com&gt;</AUTHOR>' >> Apophenia.ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> Apophenia.ppd
