@@ -1,7 +1,7 @@
 # This Makefile is for the Apophenia extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 7.1 (Revision: 71000) from the contents of
+# 7.18 (Revision: 71800) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -11,8 +11,8 @@
 
 #   MakeMaker Parameters:
 
-#     ABSTRACT_FROM => q[lib/Apophenia.pm]
-#     AUTHOR => [q[Hao Wu <hwu@localdomain>]]
+#     ABSTRACT_FROM => q[Apophenia.pm]
+#     AUTHOR => [q[Hao Wu <echowuhao@gmail.com>]]
 #     BUILD_REQUIRES => {  }
 #     CONFIGURE_REQUIRES => {  }
 #     DEFINE => q[]
@@ -20,9 +20,10 @@
 #     LIBS => [q[-lapophenia -lgsl -lgslcblas -lsqlite3]]
 #     LICENSE => q[perl]
 #     NAME => q[Apophenia]
+#     OBJECT => q[Apophenia.o Apophenia_wrap.o]
 #     PREREQ_PM => {  }
 #     TEST_REQUIRES => {  }
-#     VERSION_FROM => q[lib/Apophenia.pm]
+#     VERSION_FROM => q[Apophenia.pm]
 
 # --- MakeMaker post_initialize section:
 
@@ -42,11 +43,11 @@ FULL_AR = /usr/bin/ar
 LD = cc
 LDDLFLAGS = -shared -O2 -L/usr/local/lib -fstack-protector
 LDFLAGS =  -fstack-protector -L/usr/local/lib
-LIBC = libc-2.15.so
+LIBC = libc-2.19.so
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = linux
-OSVERS = 3.2.0-101-generic
+OSVERS = 4.2.0-36-generic
 RANLIB = :
 SITELIBEXP = /home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0
 SITEARCHEXP = /home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/x86_64-linux
@@ -61,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Apophenia
 NAME_SYM = Apophenia
-VERSION = 0.01
+VERSION = 0
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_01
+VERSION_SYM = 0
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.01
+XS_VERSION = 0
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -143,8 +144,8 @@ PERM_RW = 644
 PERM_RWX = 755
 
 MAKEMAKER   = /home/hwu/perl5/lib/perl5/ExtUtils/MakeMaker.pm
-MM_VERSION  = 7.1
-MM_REVISION = 71000
+MM_VERSION  = 7.18
+MM_REVISION = 71800
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -155,21 +156,22 @@ FULLEXT = Apophenia
 BASEEXT = Apophenia
 PARENT_NAME = 
 DLBASE = $(BASEEXT)
-VERSION_FROM = lib/Apophenia.pm
+VERSION_FROM = Apophenia.pm
 INC = -I. -I/usr/include/lib
 DEFINE = 
-OBJECT = $(BASEEXT)$(OBJ_EXT)
+OBJECT = Apophenia$(OBJ_EXT) Apophenia_wrap$(OBJ_EXT)
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
 BOOTDEP = 
 
 # Handy lists of source code files:
-XS_FILES = Apophenia.xs
-C_FILES  = Apophenia.c
-O_FILES  = Apophenia.o
-H_FILES  = ppport.h
+XS_FILES = 
+C_FILES  = Apophenia_wrap.c
+O_FILES  = Apophenia_wrap.o
+H_FILES  = apop.h \
+	ppport.h
 MAN1PODS = 
-MAN3PODS = lib/Apophenia.pm
+MAN3PODS = 
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
@@ -192,14 +194,11 @@ PERL_ARCHIVEDEP    =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/Apophenia.pm
-
-PM_TO_BLIB = lib/Apophenia.pm \
-	blib/lib/Apophenia.pm
+TO_INST_PM = Apophenia.pm
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 7.1
+MM_Unix_VERSION = 7.18
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -216,7 +215,7 @@ XSUBPP = "$(XSUBPPDIR)$(DFSEP)xsubpp"
 XSUBPPRUN = $(PERLRUN) $(XSUBPP)
 XSPROTOARG = 
 XSUBPPDEPS = /home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0/ExtUtils/typemap /home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0/ExtUtils$(DFSEP)xsubpp
-XSUBPPARGS = -typemap "/home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0/ExtUtils/typemap"
+XSUBPPARGS = -typemap '/home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0/ExtUtils/typemap'
 XSUBPP_EXTRA_ARGS =
 
 
@@ -273,7 +272,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Apophenia
-DISTVNAME = Apophenia-0.01
+DISTVNAME = Apophenia-0
 
 
 # --- MakeMaker macro section:
@@ -298,7 +297,7 @@ MPOLLUTE =
 EXTRALIBS = -lapophenia -lgsl -lgslcblas -lsqlite3
 LDLOADLIBS = -lapophenia -lgsl -lgslcblas -lsqlite3
 BSLOADLIBS = 
-LD_RUN_PATH = /usr/local/lib:/usr/lib:/usr/lib/x86_64-linux-gnu
+LD_RUN_PATH = /usr/local/lib:/usr/lib/x86_64-linux-gnu
 
 
 # --- MakeMaker const_cccmd section:
@@ -316,14 +315,14 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 	LINKTYPE="$(LINKTYPE)"\
 	OPTIMIZE="$(OPTIMIZE)"\
 	PREFIX="$(PREFIX)"\
-	PASTHRU_DEFINE="$(PASTHRU_DEFINE)"\
-	PASTHRU_INC="$(PASTHRU_INC)"
+	PASTHRU_DEFINE=' $(PASTHRU_DEFINE)'\
+	PASTHRU_INC='-I. -I/usr/include/lib $(PASTHRU_INC)'
 
 
 # --- MakeMaker special_targets section:
 .SUFFIXES : .xs .c .C .cpp .i .s .cxx .cc $(OBJ_EXT)
 
-.PHONY: all config static dynamic test linkext manifest blibdirs clean realclean disttest distdir
+.PHONY: all config static dynamic test linkext manifest blibdirs clean realclean disttest distdir pure_all subdirs clean_subdirs makemakerdflt manifypods realclean_subdirs subdirs_dynamic subdirs_pure_nolink subdirs_static subdirs-test_dynamic subdirs-test_static test_dynamic test_static
 
 
 
@@ -335,44 +334,46 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 	$(PERLTYPE) $(MPOLLUTE) $(DEFINE_VERSION) \
 	$(XS_DEFINE_VERSION) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c > $*.i
 
-.c.s:
-	$(CCCMD) -S $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
+.c.s :
+	$(CCCMD) -S $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c 
 
-.c$(OBJ_EXT):
+.c$(OBJ_EXT) :
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
 
-.cpp$(OBJ_EXT):
+.cpp$(OBJ_EXT) :
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.cpp
 
-.cxx$(OBJ_EXT):
+.cxx$(OBJ_EXT) :
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.cxx
 
-.cc$(OBJ_EXT):
+.cc$(OBJ_EXT) :
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.cc
 
-.C$(OBJ_EXT):
+.C$(OBJ_EXT) :
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.C
 
 
 # --- MakeMaker xs_c section:
 
 .xs.c:
-	$(XSUBPPRUN) $(XSPROTOARG) $(XSUBPPARGS) $(XSUBPP_EXTRA_ARGS) $*.xs > $*.xsc && $(MV) $*.xsc $*.c
+	$(XSUBPPRUN) $(XSPROTOARG) $(XSUBPPARGS) $(XSUBPP_EXTRA_ARGS) $*.xs > $*.xsc
+	$(MV) $*.xsc $*.c
 
 
 # --- MakeMaker xs_o section:
-
-.xs$(OBJ_EXT):
-	$(XSUBPPRUN) $(XSPROTOARG) $(XSUBPPARGS) $*.xs > $*.xsc && $(MV) $*.xsc $*.c
-	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
+.xs$(OBJ_EXT) :
+	$(XSUBPPRUN) $(XSPROTOARG) $(XSUBPPARGS) $*.xs > $*.xsc
+	$(MV) $*.xsc $*.c
+	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c 
 
 
 # --- MakeMaker top_targets section:
 all :: pure_all manifypods
 	$(NOECHO) $(NOOP)
 
-
 pure_all :: config pm_to_blib subdirs linkext
+	$(NOECHO) $(NOOP)
+
 	$(NOECHO) $(NOOP)
 
 subdirs :: $(MYEXTLIB)
@@ -381,7 +382,7 @@ subdirs :: $(MYEXTLIB)
 config :: $(FIRST_MAKEFILE) blibdirs
 	$(NOECHO) $(NOOP)
 
-$(O_FILES): $(H_FILES)
+$(O_FILES) : $(H_FILES)
 
 help :
 	perldoc ExtUtils::MakeMaker
@@ -439,7 +440,7 @@ $(INST_MAN3DIR)$(DFSEP).exists :: Makefile.PL
 
 # --- MakeMaker linkext section:
 
-linkext :: $(LINKTYPE)
+linkext :: dynamic
 	$(NOECHO) $(NOOP)
 
 
@@ -452,38 +453,39 @@ BOOTSTRAP = $(BASEEXT).bs
 # As Mkbootstrap might not write a file (if none is required)
 # we use touch to prevent make continually trying to remake it.
 # The DynaLoader only reads a non-empty file.
-$(BOOTSTRAP) : $(FIRST_MAKEFILE) $(BOOTDEP) $(INST_ARCHAUTODIR)$(DFSEP).exists
-	$(NOECHO) $(ECHO) "Running Mkbootstrap for $(NAME) ($(BSLOADLIBS))"
+$(BASEEXT).bs : $(FIRST_MAKEFILE) $(BOOTDEP)
+	$(NOECHO) $(ECHO) "Running Mkbootstrap for $(BASEEXT) ($(BSLOADLIBS))"
 	$(NOECHO) $(PERLRUN) \
 		"-MExtUtils::Mkbootstrap" \
 		-e "Mkbootstrap('$(BASEEXT)','$(BSLOADLIBS)');"
-	$(NOECHO) $(TOUCH) "$@"
-	$(CHMOD) $(PERM_RW) "$@"
+	$(NOECHO) $(TOUCH) "$(BASEEXT).bs"
+	$(CHMOD) $(PERM_RW) "$(BASEEXT).bs"
+
+$(INST_ARCHAUTODIR)/$(BASEEXT).bs : $(BASEEXT).bs $(INST_ARCHAUTODIR)$(DFSEP).exists
+	$(NOECHO) $(RM_RF) $(INST_ARCHAUTODIR)/$(BASEEXT).bs
+	- $(CP_NONEMPTY) $(BASEEXT).bs $(INST_ARCHAUTODIR)/$(BASEEXT).bs $(PERM_RW)
 
 
 # --- MakeMaker dynamic section:
 
-dynamic :: $(FIRST_MAKEFILE) $(BOOTSTRAP) $(INST_DYNAMIC)
+dynamic :: $(FIRST_MAKEFILE) config $(INST_BOOT) $(INST_DYNAMIC)
 	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker dynamic_lib section:
-
-# This section creates the dynamically loadable $(INST_DYNAMIC)
-# from $(OBJECT) and possibly $(MYEXTLIB).
+# This section creates the dynamically loadable objects from relevant
+# objects and possibly $(MYEXTLIB).
 ARMAYBE = :
 OTHERLDFLAGS = 
 INST_DYNAMIC_DEP = 
 INST_DYNAMIC_FIX = 
 
-$(INST_DYNAMIC): $(OBJECT) $(MYEXTLIB) $(INST_ARCHAUTODIR)$(DFSEP).exists $(EXPORT_LIST) $(PERL_ARCHIVEDEP) $(PERL_ARCHIVE_AFTER) $(INST_DYNAMIC_DEP)
+$(INST_DYNAMIC) : $(OBJECT) $(MYEXTLIB) $(INST_ARCHAUTODIR)$(DFSEP).exists $(EXPORT_LIST) $(PERL_ARCHIVEDEP) $(PERL_ARCHIVE_AFTER) $(INST_DYNAMIC_DEP)
 	$(RM_F) $@
-	LD_RUN_PATH="$(LD_RUN_PATH)" $(LD)  $(LDDLFLAGS) $(LDFROM) $(OTHERLDFLAGS) -o $@ $(MYEXTLIB)	\
-	  $(PERL_ARCHIVE) $(LDLOADLIBS) $(PERL_ARCHIVE_AFTER) $(EXPORT_LIST)	\
+	LD_RUN_PATH="$(LD_RUN_PATH)" $(LD)  $(LDDLFLAGS) -o $@ $(OTHERLDFLAGS) $(LDFROM) $(MYEXTLIB) \
+	  $(PERL_ARCHIVE) $(LDLOADLIBS) $(PERL_ARCHIVE_AFTER) $(EXPORT_LIST) \
 	  $(INST_DYNAMIC_FIX)
 	$(CHMOD) $(PERM_RWX) $@
-	$(NOECHO) $(RM_RF) $(BOOTSTRAP)
-	- $(CP_NONEMPTY) $(BOOTSTRAP) $(INST_BOOT) $(PERM_RW)
 
 
 # --- MakeMaker static section:
@@ -495,12 +497,12 @@ static :: $(FIRST_MAKEFILE) $(INST_STATIC)
 
 
 # --- MakeMaker static_lib section:
-
-$(INST_STATIC) : $(OBJECT) $(MYEXTLIB) $(INST_ARCHAUTODIR)$(DFSEP).exists
-	$(RM_RF) $@
-	$(FULL_AR) $(AR_STATIC_ARGS) $@ $(OBJECT) && $(RANLIB) $@
+$(INST_STATIC): $(OBJECT) $(MYEXTLIB) $(INST_ARCHAUTODIR)$(DFSEP).exists
+	$(RM_F) "$@"
+	$(FULL_AR) $(AR_STATIC_ARGS) "$@" $(OBJECT)
+	$(RANLIB) "$@"
 	$(CHMOD) $(PERM_RWX) $@
-	$(NOECHO) $(ECHO) "$(EXTRALIBS)" > "$(INST_ARCHAUTODIR)/extralibs.ld"
+	$(NOECHO) $(ECHO) "$(EXTRALIBS)" > $(INST_ARCHAUTODIR)$(DFSEP)extralibs.ld
 
 
 # --- MakeMaker manifypods section:
@@ -509,10 +511,8 @@ POD2MAN_EXE = $(PERLRUN) "-MExtUtils::Command::MM" -e pod2man "--"
 POD2MAN = $(POD2MAN_EXE)
 
 
-manifypods : pure_all  \
-	lib/Apophenia.pm
-	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) -u \
-	  lib/Apophenia.pm $(INST_MAN3DIR)/Apophenia.$(MAN3EXT) 
+manifypods : pure_all config 
+	$(NOECHO) $(NOOP)
 
 
 
@@ -544,17 +544,17 @@ clean :: clean_subdirs
 	  $(BOOTSTRAP) $(INST_ARCHAUTODIR)/extralibs.all \
 	  $(INST_ARCHAUTODIR)/extralibs.ld $(MAKE_APERL_FILE) \
 	  *$(LIB_EXT) *$(OBJ_EXT) \
-	  *perl.core Apophenia.c \
-	  MYMETA.json MYMETA.yml \
-	  blibdirs.ts core \
-	  core.*perl.*.? core.[0-9] \
-	  core.[0-9][0-9] core.[0-9][0-9][0-9] \
-	  core.[0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9][0-9] \
-	  lib$(BASEEXT).def mon.out \
-	  perl perl$(EXE_EXT) \
-	  perl.exe perlmain.c \
-	  pm_to_blib pm_to_blib.ts \
-	  so_locations tmon.out 
+	  *perl.core MYMETA.json \
+	  MYMETA.yml blibdirs.ts \
+	  core core.*perl.*.? \
+	  core.[0-9] core.[0-9][0-9] \
+	  core.[0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9] \
+	  core.[0-9][0-9][0-9][0-9][0-9] lib$(BASEEXT).def \
+	  mon.out perl \
+	  perl$(EXE_EXT) perl.exe \
+	  perlmain.c pm_to_blib \
+	  pm_to_blib.ts so_locations \
+	  tmon.out 
 	- $(RM_RF) \
 	  blib 
 	  $(NOECHO) $(RM_F) $(MAKEFILE_OLD)
@@ -562,15 +562,16 @@ clean :: clean_subdirs
 
 
 # --- MakeMaker realclean_subdirs section:
-realclean_subdirs :
+# so clean is forced to complete before realclean_subdirs runs
+realclean_subdirs : clean
 	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker realclean section:
 # Delete temporary files (via clean) and also delete dist files
-realclean purge ::  clean realclean_subdirs
+realclean purge :: realclean_subdirs
 	- $(RM_F) \
-	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) \
+	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) \
 	  $(OBJECT) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
@@ -580,15 +581,15 @@ realclean purge ::  clean realclean_subdirs
 metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '---' > META_new.yml
-	$(NOECHO) $(ECHO) 'abstract: '\''Perl extension for Apopnenia C lib'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'abstract: unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  - '\''Hao Wu <hwu@localdomain>'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  - '\''Hao Wu <echowuhao@gmail.com>'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
-	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.1, CPAN::Meta::Converter version 2.150005'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.18, CPAN::Meta::Converter version 2.150005'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license: perl' >> META_new.yml
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
@@ -599,17 +600,17 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires: {}' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: '\''0.01'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'x_serialization_backend: '\''CPAN::Meta::YAML version 0.016'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'x_serialization_backend: '\''CPAN::Meta::YAML version 0.018'\''' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
-	$(NOECHO) $(ECHO) '   "abstract" : "Perl extension for Apopnenia C lib",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "abstract" : "unknown",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "author" : [' >> META_new.json
-	$(NOECHO) $(ECHO) '      "Hao Wu <hwu@localdomain>"' >> META_new.json
+	$(NOECHO) $(ECHO) '      "Hao Wu <echowuhao@gmail.com>"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "dynamic_config" : 1,' >> META_new.json
-	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.1, CPAN::Meta::Converter version 2.150005",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.18, CPAN::Meta::Converter version 2.150005",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "license" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "perl_5"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
@@ -640,8 +641,8 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0.01",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27203"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27300"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -741,17 +742,17 @@ ci :
 distmeta : create_distdir metafile
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -e q{META.yml};' \
 	  -e 'eval { maniadd({q{META.yml} => q{Module YAML meta-data (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add META.yml to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add META.yml to MANIFEST: $${'\''@'\''}"' --
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -f q{META.json};' \
 	  -e 'eval { maniadd({q{META.json} => q{Module JSON meta-data (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add META.json to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add META.json to MANIFEST: $${'\''@'\''}"' --
 
 
 
 # --- MakeMaker distsignature section:
 distsignature : distmeta
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add SIGNATURE to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add SIGNATURE to MANIFEST: $${'\''@'\''}"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
 	cd $(DISTVNAME) && cpansign -s
 
@@ -827,7 +828,7 @@ doc_perl_install :: all
 	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" $(INSTALLPRIVLIB) \
+		"installed into" "$(INSTALLPRIVLIB)" \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
@@ -838,7 +839,7 @@ doc_site_install :: all
 	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" $(INSTALLSITELIB) \
+		"installed into" "$(INSTALLSITELIB)" \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
@@ -849,7 +850,7 @@ doc_vendor_install :: all
 	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" $(INSTALLVENDORLIB) \
+		"installed into" "$(INSTALLVENDORLIB)" \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
@@ -953,8 +954,6 @@ PERL_HDRS = \
 
 $(OBJECT) : $(PERL_HDRS)
 
-Apophenia.c : $(XSUBPPDEPS)
-
 
 # --- MakeMaker makefile section:
 
@@ -980,11 +979,12 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
 FULLPERL      = "/home/hwu/perl5/perlbrew/perls/perl-5.24.0/bin/perl"
+MAP_PERLINC   = "-Iblib/arch" "-Iblib/lib" "-I/home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0/x86_64-linux" "-I/home/hwu/perl5/perlbrew/perls/perl-5.24.0/lib/5.24.0"
 
-$(MAP_TARGET) :: static $(MAKE_APERL_FILE)
+$(MAP_TARGET) :: $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
 
-$(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
+$(MAKE_APERL_FILE) : static $(FIRST_MAKEFILE) pm_to_blib
 	$(NOECHO) $(ECHO) Writing \"$(MAKE_APERL_FILE)\" for this $(MAP_TARGET)
 	$(NOECHO) $(PERLRUNINST) \
 		Makefile.PL DIR="" \
@@ -993,7 +993,6 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 
 
 # --- MakeMaker test section:
-
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
@@ -1001,51 +1000,67 @@ TEST_FILES = t/*.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
-
-test :: $(TEST_TYPE) subdirs-test
-
-subdirs-test ::
 	$(NOECHO) $(NOOP)
 
+test :: $(TEST_TYPE)
+	$(NOECHO) $(NOOP)
 
-test_dynamic :: pure_all
+# Occasionally we may face this degenerate target:
+test_ : test_dynamic
+	$(NOECHO) $(NOOP)
+
+subdirs-test_dynamic :: dynamic pure_all
+
+test_dynamic :: subdirs-test_dynamic
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
 
-testdb_dynamic :: pure_all
+testdb_dynamic :: dynamic pure_all
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
-test_ : test_dynamic
+subdirs-test_static :: static pure_all
 
-test_static :: pure_all $(MAP_TARGET)
-	PERL_DL_NONLAZY=1 ./$(MAP_TARGET) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
+test_static :: subdirs-test_static $(MAP_TARGET)
+	PERL_DL_NONLAZY=1 "/home/hwu/dev/apophenia-perl/$(MAP_TARGET)" $(MAP_PERLINC) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
 
-testdb_static :: pure_all $(MAP_TARGET)
-	PERL_DL_NONLAZY=1 ./$(MAP_TARGET) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
+testdb_static :: static pure_all $(MAP_TARGET)
+	PERL_DL_NONLAZY=1 "/home/hwu/dev/apophenia-perl/$(MAP_TARGET)" $(MAP_PERLINC) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
 
 
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="$(VERSION)">' > $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>Perl extension for Apopnenia C lib</ABSTRACT>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>Hao Wu &lt;hwu@localdomain&gt;</AUTHOR>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-5.24" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="Apophenia" VERSION="0">' > Apophenia.ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '    <AUTHOR>Hao Wu &lt;echowuhao@gmail.com&gt;</AUTHOR>' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-5.24" />' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> Apophenia.ppd
+	$(NOECHO) $(ECHO) '</SOFTPKG>' >> Apophenia.ppd
 
 
 # --- MakeMaker pm_to_blib section:
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  lib/Apophenia.pm blib/lib/Apophenia.pm 
+	  'Apophenia.pm' '$(INST_LIB)/Apophenia.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
 # --- MakeMaker selfdocument section:
+
+# here so even if top_targets is overridden, these will still be defined
+# gmake will silently still work if any are .PHONY-ed but nmake won't
+
+static ::
+	$(NOECHO) $(NOOP)
+
+dynamic ::
+	$(NOECHO) $(NOOP)
+
+config ::
+	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker postamble section:

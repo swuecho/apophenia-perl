@@ -1,10 +1,10 @@
 {
-   "abstract" : "Perl extension for Apopnenia C lib",
+   "abstract" : "unknown",
    "author" : [
-      "Hao Wu <hwu@localdomain>"
+      "Hao Wu <echowuhao@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 7.1, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "ExtUtils::MakeMaker version 7.18, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "perl_5"
    ],
@@ -35,6 +35,6 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.01",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0",
+   "x_serialization_backend" : "JSON::PP version 2.27300"
 }

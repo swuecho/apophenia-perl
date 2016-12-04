@@ -4,10 +4,10 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     NAME              => 'Apophenia',
-    VERSION_FROM      => 'lib/Apophenia.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
+    VERSION_FROM      => 'Apophenia.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ABSTRACT_FROM     => 'lib/Apophenia.pm', # retrieve abstract from module
-    AUTHOR            => 'Hao Wu <hwu@localdomain>',
+    ABSTRACT_FROM     => 'Apophenia.pm', # retrieve abstract from module
+    AUTHOR            => 'Hao Wu <echowuhao@gmail.com>',
     LICENSE           => 'perl',
     #Value must be from legacy list of licenses here
     #http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI
@@ -16,4 +16,5 @@ WriteMakefile(
     INC               => '-I. -I/usr/include/lib', # e.g., '-I. -I/usr/include/other'
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
+    OBJECT  => 'Apophenia.o Apophenia_wrap.o' 
 );
